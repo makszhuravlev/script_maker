@@ -16,3 +16,30 @@ const { onDragStart } = useDragAndDrop()
     </div>
   </aside>
 </template>
+
+<style scoped>
+.vue-flow__node-default{
+  padding: 10px;
+  border-radius: 3px;
+  width: 90%;
+  font-size: 12px;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  color: var(--vf-node-text);
+  background-color: var(--vf-node-bg);
+  border-color: var(--vf-node-color);
+}
+.custom-node {
+  padding: 10px;
+  border-radius: 300px;
+  width: 90%;
+  font-size: 12px;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  color: var(--vf-node-text);
+  background-color: var(--vf-node-bg);
+  border-color: var(--vf-node-color);
+}
+</style>
