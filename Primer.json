@@ -1,0 +1,34 @@
+{
+    "name" : "имя скрипта",
+    "purpose" : "цель",
+    "script" :{
+        "block_1":{
+            "position":{"x":343,"y":256},
+            "type":"menedger",
+            "style":"start",
+            "conectors":{
+                "input":["1", "2"],
+                "output": ["3", "4"]
+            },
+            "header":"заголовок блока",
+            "description":"информация внутри {name} блока",
+            "dynamic":{"name":"User1"},
+            "UnresolverAnswer":["Hello", "Otvet2"]
+        },
+        "block_2":{
+            "position":{"x":3432,"y":23356},
+            "type":"client",
+            "style":"positive",
+            "conectors":{
+                "input":["2"],
+                "output": ["4"]
+            },
+            "header":"заголовок блока",
+            "description":"информация внутри блока",
+            "dynamic":{},
+            "UnresolverAnswer":[]
+        }
+    }
+
+}
+
