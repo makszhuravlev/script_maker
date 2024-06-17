@@ -75,7 +75,6 @@ export default function useDragAndDrop() {
 
   /**
    * Handles the drop event.
-   *
    * @param {DragEvent} event
    */
   function onDrop(event) {
