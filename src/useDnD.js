@@ -98,7 +98,7 @@ export default function useDragAndDrop() {
       id: nodeId,
       type: draggedType.value,
       position,
-      data: { label:  message.value , description: ""},
+      data: { label:  message.value , description: "", dynamicFields: ""},
     }
     /**
      * Align node position after drop, so it's centered to the mouse

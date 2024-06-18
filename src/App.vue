@@ -14,6 +14,8 @@ const { onConnect, addEdges, onNodeClick, updateNode, toObject, fromObject} = us
 
 const message = ref('')
 const description = ref('')
+const dynamicFields = ref('')
+const typeNode = ref()
 const id = ref(0)
 
 const { onDragOver, onDrop, onDragLeave, isDragOver } = useDragAndDrop()
@@ -26,11 +28,19 @@ onNodeClick((event) => {
   message.value = event.node.data.label
   id.value = event.node.id
   description.value = event.node.data.description
-  console.log(event.node.data)
+  dynamicFields.value = event.node.data.dynamicFields
+  if(event.node.type === 'custom'){
+    typeNode.value = true
+  }
+  else{
+    typeNode.value = false
+  }
+  
+ 
 })
 
 function handleUpdate() {
-  updateNode(id.value, { data: { label: message.value, description: description.value }})
+  updateNode(id.value, { data: { label: message.value, description: description.value , dynamicFields: dynamicFields.value}})
 }
 
 
@@ -67,8 +77,9 @@ function onRestore() {
       </DropzoneBackground>
       
       <Panel position="top-right">  
-        <label for="label">Название:<textarea id="label"  v-model="message" @input="handleUpdate" ></textarea></label>
-        <label for="description">Описание:<textarea id="description"  v-model="description" @input="handleUpdate" ></textarea></label>
+        <label for="label"><textarea id="label"  v-model="message" @input="handleUpdate" class="block block-title" placeholder="Название:"></textarea></label>
+        <label for="description"><textarea id="description"  v-model="description" @input="handleUpdate" class="block block-content" placeholder="Описание:"></textarea></label>
+        <label v-show="typeNode" for="dynamic"><textarea id="dynamicFields"  v-model="dynamicFields" @input="handleUpdate" class="block block-dynamic-fields" placeholder="Динамические поля:"></textarea></label>
         <div class="buttons">
           <button title="save graph" @click="onSave">
             <Icon name="save" />
