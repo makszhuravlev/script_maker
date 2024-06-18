@@ -77,6 +77,8 @@ function onRestore() {
       </DropzoneBackground>
       
       <Panel position="top-right">  
+        <p v-show="typeNode">Реплика менеджера</p>
+        <p v-show="!typeNode">Реплика клиента</p>
         <label for="label"><textarea id="label"  v-model="message" @input="handleUpdate" class="block block-title" placeholder="Название:"></textarea></label>
         <label for="description"><textarea id="description"  v-model="description" @input="handleUpdate" class="block block-content" placeholder="Описание:"></textarea></label>
         <label v-show="typeNode" for="dynamic"><textarea id="dynamicFields"  v-model="dynamicFields" @input="handleUpdate" class="block block-dynamic-fields" placeholder="Динамические поля:"></textarea></label>
