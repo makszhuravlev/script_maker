@@ -6,7 +6,6 @@ import DropzoneBackground from './DropzoneBackground.vue'
 import Sidebar from './Sidebar.vue'
 import useDragAndDrop from './useDnD.js'
 import CustomNode from './CustomNode.vue'
-
 import Icon from './Icon.vue'
 
 const flowKey = 'vue-flow--save-restore'
@@ -35,8 +34,6 @@ onNodeClick((event) => {
   else{
     typeNode.value = false
   }
-  
- 
 })
 
 function handleUpdate() {

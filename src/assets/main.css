@@ -320,20 +320,16 @@ body,
   .basic-flow.dark .vue-flow__edge-text {
       fill:#fffffb
   }
-  
-  /* General styling for the container to align items vertically */
 
-/* Styling for each block */
 .block {
-  width: 250px; /* Fixed width for all blocks */
+  width: 250px;
   padding: 10px;
-  background-color: #d3d3d3; /* Grey background */
-  border-radius: 10px; /* Rounded corners */
-  font-size: 14px; /* Adjust font size */
-  color: #333; /* Dark grey text color */
+  background-color: #d3d3d3;
+  border-radius: 10px;
+  font-size: 14px; 
+  color: #333;
 }
 
-/* Different heights for each block */
 .block-title {
   height: 20px;
 }
@@ -345,8 +341,3 @@ body,
 .block-dynamic-fields {
   height: 70px;
 }
-
-
-
-
-  
