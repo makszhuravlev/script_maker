@@ -24,8 +24,7 @@ const name = ref("Вася  Пупкин")
 
     }
     function runScript(i) {
-      fetchData()
-      alert('Запуск скрипта ' + i);
+      router.push({ path: '/editor/'+i })
     }
     function create(i) {
       router.push({ path: '/editor/1' })
@@ -47,7 +46,7 @@ const name = ref("Вася  Пупкин")
     </div>
     <div class="content">
       <div class="button-list">
-        <button class="script-button" v-for="(item, index) in da" @click="fetchData">Скрипт {{ item.name }}</button>
+        <button class="script-button" v-for="(item, index) in da" @click="runScript(item.id)">Скрипт {{ item.name }}</button>
       </div>
     </div>
   </div>
