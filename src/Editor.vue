@@ -96,3 +96,6 @@ function onRestore() {
     
   </div>
 </template>
+<style scoped>
+
+</style>
