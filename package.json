@@ -13,7 +13,8 @@
     "axios": "^1.7.2",
     "express": "^4.19.2",
     "request": "^2.88.2",
-    "vue": "^3.3.8"
+    "vue": "^3.3.8",
+    "vue-router": "^4.3.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.34.1",
