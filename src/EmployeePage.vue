@@ -7,7 +7,7 @@ import {useRouter,useRoute } from 'vue-router'
 const da = ref([])
 
 
-axios.get('http://127.0.0.1:5000/getall') .then(response => { 
+axios.get('http://88.84.211.248:5000/getall') .then(response => { 
   da.value = response.data; 
   })
 
@@ -15,7 +15,7 @@ axios.get('http://127.0.0.1:5000/getall') .then(response => {
 console.log(da);
 const router = useRouter()
 const route = useRoute()
-const name = ref("Вася  Пупуин")
+const name = ref("Вася  Пупкин")
     function getname(){
      
     }
