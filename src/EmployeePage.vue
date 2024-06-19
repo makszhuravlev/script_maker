@@ -1,10 +1,20 @@
 <script setup>
+import axios from 'axios';
 import { ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import {useRouter,useRoute } from 'vue-router'
+
+const da = ref([])
+
+
+axios.get('http://127.0.0.1:5000/getall') .then(response => { 
+  da.value = response.data; 
+  })
+
+
+console.log(da);
 const router = useRouter()
 const route = useRoute()
-const da = ref(["продажи","sadasdasdas",3,34343])
 const name = ref("Вася  Пупуин")
     function getname(){
      
@@ -14,7 +24,7 @@ const name = ref("Вася  Пупуин")
 
     }
     function runScript(i) {
-      
+      fetchData()
       alert('Запуск скрипта ' + i);
     }
     function create(i) {
@@ -37,7 +47,7 @@ const name = ref("Вася  Пупуин")
     </div>
     <div class="content">
       <div class="button-list">
-        <button class="script-button" v-for="(item, index) in da" @click="runScript(item)">Скрипт {{ item }}</button>
+        <button class="script-button" v-for="(item, index) in da" @click="fetchData">Скрипт {{ item.name }}</button>
       </div>
     </div>
   </div>
