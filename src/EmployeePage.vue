@@ -1,21 +1,24 @@
 <script setup>
 import { ref } from 'vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import {useRouter,useRoute } from 'vue-router'
+const router = useRouter()
+const route = useRoute()
 const da = ref(["продажи","sadasdasdas",3,34343])
 const name = ref("Вася  Пупуин")
     function getname(){
      
-      //скрипт полусения имени из бд
     }
     function exit() {
-      alert('Выход');
+      router.push({ path: '/' })
+
     }
     function runScript(i) {
       
       alert('Запуск скрипта ' + i);
     }
     function create(i) {
-      
-      alert('создание скрипта');
+      router.push({ path: '/editor/1' })
     }
 
 </script>
@@ -28,7 +31,8 @@ const name = ref("Вася  Пупуин")
       <h1>{{ name }}</h1>
       <div class="button-container">
         <button class="create-button" @click="create">Новый скрипт</button>
-        <button class="logout-button" @click="exit">Выход</button>
+        <router-link > <button class="logout-button" @click="exit">Выход</button></router-link>
+       
       </div>
     </div>
     <div class="content">

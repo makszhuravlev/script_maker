@@ -13,7 +13,8 @@
             required
           />
         </div>
-        <div class="form-group">
+        <div class="form-gr
+        oup">
           <label for="password">Пароль</label>
           <input
             type="password"
