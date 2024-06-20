@@ -26,6 +26,7 @@ axios.get('http://88.84.211.248:5000/getall') .then(response => {
   //console.log(key, IdScript, response.data[key].id)
   if(response.data[key].id == IdScript){
     console.log(response.data[key].json)
+    fromObject(JSON.parse(response.data[key].json))
   }
  }
 })
@@ -63,12 +64,12 @@ function handleUpdate() {
 
 function onSave() {
   localStorage.setItem(flowKey, JSON.stringify(toObject()))
-  console.log(JSON.stringify(toObject()))
+  
 }
 
-function onRestore() {
+function onRestore(JsonScript) {
   const flow = JSON.parse(localStorage.getItem(flowKey))
-
+  console.log(flow)
   if (flow) {
     fromObject(flow)
   }
