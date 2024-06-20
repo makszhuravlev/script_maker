@@ -14,22 +14,10 @@ const flowKey = 'vue-flow--save-restore'
 const { onConnect, addEdges, onNodeClick, updateNode, toObject, fromObject} = useVueFlow()
 
 
-
 const route = useRoute();
 const IdScript = route.params.id;
 
 const data = ref([])
-
-
-axios.get('http://88.84.211.248:5000/getall') .then(response => { 
- for (var key in response.data) {
-  //console.log(key, IdScript, response.data[key].id)
-  if(response.data[key].id == IdScript){
-    console.log(response.data[key].json)
-    fromObject(JSON.parse(response.data[key].json))
-  }
- }
-})
 
 
 const message = ref('')
@@ -42,6 +30,17 @@ const { onDragOver, onDrop, onDragLeave, isDragOver } = useDragAndDrop()
 
 const nodes = ref<Node>([])
 const edges = ref([])
+
+
+axios.get('http://88.84.211.248:5000/getall') .then(response => { 
+ for (var key in response.data) {
+  //console.log(key, IdScript, response.data[key].id)
+  if(response.data[key].id == IdScript){
+  
+    fromObject(JSON.parse(response.data[key].json))
+  }
+ }
+})
 onConnect(addEdges)
 
 onNodeClick((event) => {
@@ -64,15 +63,14 @@ function handleUpdate() {
 
 function onSave() {
   localStorage.setItem(flowKey, JSON.stringify(toObject()))
-  
-}
+  console.log(JSON.stringify(toObject()))
+        axios.post("http://88.84.211.248:5000/update",
+          {
+            'id': IdScript,
+            'json': JSON.stringify(toObject())
+          }
+        );
 
-function onRestore(JsonScript) {
-  const flow = JSON.parse(localStorage.getItem(flowKey))
-  console.log(flow)
-  if (flow) {
-    fromObject(flow)
-  }
 }
 </script>
 
@@ -102,9 +100,6 @@ function onRestore(JsonScript) {
         <div class="buttons">
           <button title="save graph" @click="onSave">
             <Icon name="save" />
-          </button>
-          <button title="restore graph" @click="onRestore">
-            <Icon name="restore" />
           </button>
         </div>
       </Panel>
