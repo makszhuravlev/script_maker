@@ -17,6 +17,10 @@ const { onConnect, addEdges, onNodeClick, updateNode, toObject, fromObject} = us
 const route = useRoute();
 const IdScript = route.params.id;
 
+
+
+console.log(IdScript)
+
 const data = ref([])
 
 

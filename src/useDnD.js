@@ -1,5 +1,7 @@
 import { useVueFlow } from '@vue-flow/core'
 import { ref, watch } from 'vue'
+import { useRoute } from "vue-router";
+import axios from 'axios';
 
 let id = 0
 const message = ref('')
@@ -28,6 +30,19 @@ export default function useDragAndDrop() {
 
   const { addNodes, screenToFlowCoordinate, onNodesInitialized, updateNode } = useVueFlow()
 
+  const route = useRoute();
+  const IdScript = route.params.id;
+  console.log(IdScript)
+  axios.get('http://88.84.211.248:5000/getall') .then(response => { 
+    for (var key in response.data) {
+     //console.log(key, IdScript, response.data[key].id)
+     if(response.data[key].id == IdScript){
+      for (var item in JSON.parse(response.data[key].json).nodes)
+       console.log(JSON.parse(response.data[key].json).nodes[item].id)
+       id = JSON.parse(response.data[key].json).nodes[item].id + 1
+     }
+    }
+   })
   watch(isDragging, (dragging) => {
     document.body.style.userSelect = dragging ? 'none' : ''
   })
