@@ -23,9 +23,9 @@ const data = ref([])
 
 axios.get('http://88.84.211.248:5000/getall') .then(response => { 
  for (var key in response.data) {
-  console.log(key, IdScript, response.data[key].id)
-  if(response.data[key].id === IdScript){
-    console.log(response.data[key])
+  //console.log(key, IdScript, response.data[key].id)
+  if(response.data[key].id == IdScript){
+    console.log(response.data[key].json)
   }
  }
 })
