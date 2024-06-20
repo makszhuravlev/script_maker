@@ -1,7 +1,9 @@
 <script setup>
+import axios from 'axios';
 import { ref } from 'vue'
 import {Panel, VueFlow, useVueFlow} from '@vue-flow/core'
 import { MiniMap } from '@vue-flow/minimap'
+import { useRoute } from "vue-router";
 import DropzoneBackground from './DropzoneBackground.vue'
 import Sidebar from './Sidebar.vue'
 import useDragAndDrop from './useDnD.js'
@@ -10,6 +12,24 @@ import Icon from './Icon.vue'
 
 const flowKey = 'vue-flow--save-restore'
 const { onConnect, addEdges, onNodeClick, updateNode, toObject, fromObject} = useVueFlow()
+
+
+
+const route = useRoute();
+const IdScript = route.params.id;
+
+const data = ref([])
+
+
+axios.get('http://88.84.211.248:5000/getall') .then(response => { 
+ for (var key in response.data) {
+  console.log(key, IdScript, response.data[key].id)
+  if(response.data[key].id === IdScript){
+    console.log(response.data[key])
+  }
+ }
+})
+
 
 const message = ref('')
 const description = ref('')
@@ -56,7 +76,6 @@ function onRestore() {
 </script>
 
 <template>
-  
   <div class="dnd-flow" @drop="onDrop">
     
     <Sidebar />

@@ -4,15 +4,15 @@ import { ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import {useRouter,useRoute } from 'vue-router'
 
-const da = ref([])
+const data = ref([])
 
 
 axios.get('http://88.84.211.248:5000/getall') .then(response => { 
-  da.value = response.data; 
+  console.log(data.value)
+  data.value = response.data; 
   })
 
 
-console.log(da);
 const router = useRouter()
 const route = useRoute()
 const name = ref("Вася  Пупкин")
@@ -46,7 +46,7 @@ const name = ref("Вася  Пупкин")
     </div>
     <div class="content">
       <div class="button-list">
-        <button class="script-button" v-for="(item, index) in da" @click="runScript(item.id)">Скрипт {{ item.name }}</button>
+        <button class="script-button" v-for="(item, index) in data" @click="runScript(item.id)">Скрипт {{ item.name }}</button>
       </div>
     </div>
   </div>
