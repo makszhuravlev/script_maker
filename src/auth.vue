@@ -5,21 +5,22 @@
       <form @submit.prevent="handleSubmit">
         <div class="form-group">
         <h2>Авторизация</h2>
-          <label for="username">Логин</label>
           <input
             type="text"
             id="username"
             v-model="username"
+            placeholder="Логин" 
             required
           />
         </div>
         <div class="form-group">
-          <label for="password">Пароль</label>
           <input
             type="password"
             id="password"
             v-model="password"
+            placeholder="Пароль" 
             required
+
           />
         </div>
         <button class="submit-button"type="submit">Войти</button>
