@@ -1,8 +1,30 @@
+<script>
+import ModalWindow from './ModalOverview.vue'
+
+export default {
+        name: 'App',
+        components: {
+            ModalWindow
+        },
+        methods: {
+            showModal: function () {
+                this.$refs.modal.show = true
+            },
+            showModalTwo: function () {
+                this.$refs.modalTwo.show = true
+            },
+            sendDataFunction: function () {
+                // обработчик отправки данных
+            }
+        },
+    }
+</script>
 <script setup>
 import axios from 'axios';
 import { ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import {useRouter,useRoute } from 'vue-router'
+
 
 const data = ref([])
 
@@ -27,7 +49,8 @@ const name = ref("Вася  Пупкин")
       router.push({ path: '/editor/'+i })
     }
     function create(i) {
-      router.push({ path: '/editor/1' })
+      //router.push({ path: '/editor/1' })
+      this.$refs.modal.show = true
     }
 
 </script>
@@ -36,10 +59,13 @@ const name = ref("Вася  Пупкин")
 
 <template>
   <div id="app">
+    
     <div class="header">
+      <modal-window ref="modal"></modal-window>
       <h1>{{ name }}</h1>
       <div class="button-container">
-        <button class="create-button" @click="create">Новый скрипт</button>
+        <button class="create-button" @click="showModal">Новый скрипт</button>
+        
         <router-link > <button class="logout-button" @click="exit">Выход</button></router-link>
        
       </div>
@@ -50,6 +76,7 @@ const name = ref("Вася  Пупкин")
       </div>
     </div>
   </div>
+  
 </template> 
 
 
