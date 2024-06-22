@@ -24,11 +24,15 @@
           />
         </div>
         <button class="submit-button"type="submit">Войти</button>
+        <a>d</a>
+        <button class="submit-button"type="submit" @click="handleSubmit">Войти без авторизации</button>
       </form>
     </div>
   </template>
   
   <script>
+  import {useRouter } from 'vue-router'
+  const router = useRouter()
   export default {
     data() {
       return {
@@ -38,6 +42,7 @@
     },
     methods: {
       handleSubmit() {
+        this.$router.push({ path: '/main' })
         console.log('Username:', this.username);
         console.log('Password:', this.password);
       },

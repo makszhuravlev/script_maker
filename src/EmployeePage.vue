@@ -36,7 +36,7 @@ axios.get('http://88.84.211.248:5000/getall') .then(response => {
 
 const router = useRouter()
 const route = useRoute()
-const name = ref("Вася  Пупкин")
+const name = ref("Имя сотрудника")
     function getname(){
      
     }
