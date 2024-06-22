@@ -9,10 +9,10 @@
                 <div class="modal-content">
 
                     <div class="form-group">
-                        <input type="text" id="name"  placeholder="Название скрипта" required/>
+                        <input type="text" id="name"  v-model="name" placeholder="Название скрипта" required/>
                     </div> 
                     <div class="form-group">
-                        <input type="text" id="name"  placeholder="Цель скрипта" required/>
+                        <input type="text" id="purpose"  v-model="purpose" placeholder="Цель скрипта" required/>
                     </div> 
                 </div>
                 
@@ -30,6 +30,12 @@
  
 <script>
     export default {
+        data(){
+            return {
+                name: '',
+                purpose: '',
+      }
+        },
         name: "ModalWindow",
         data: function () {
             return {
@@ -38,6 +44,9 @@
         },
         methods: {
             closeModal: function () {
+                console.log(this.name, this.purpose);
+                this.name = ''
+                this.purpose = ''
                 this.show = false
             }
         }
