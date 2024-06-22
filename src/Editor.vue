@@ -9,10 +9,11 @@ import Sidebar from './Sidebar.vue'
 import useDragAndDrop from './useDnD.js'
 import CustomNode from './CustomNode.vue'
 import Icon from './Icon.vue'
+import {useRouter } from 'vue-router'
 
 const flowKey = 'vue-flow--save-restore'
 const { onConnect, addEdges, onNodeClick, updateNode, toObject, fromObject} = useVueFlow()
-
+const router = useRouter()
 
 const route = useRoute();
 const IdScript = route.params.id;
@@ -76,6 +77,9 @@ function onSave() {
         );
 
 }
+function exit(){
+  router.push({ path: '/main' })
+}
 </script>
 
 <template>
@@ -104,6 +108,9 @@ function onSave() {
         <div class="buttons">
           <button title="save graph" @click="onSave">
             <Icon name="save" />
+          </button>
+          <button title="exit" @click="exit">
+            <Icon name="exit" />
           </button>
         </div>
       </Panel>
