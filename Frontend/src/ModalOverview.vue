@@ -47,9 +47,9 @@
             closeModal: function () {
                 axios.post("http://88.84.211.248:5000/create",
                     {
-                        'json': "{}",
                         'name':this.name,
-                        'purpose': this.purpose
+                        'purpose': this.purpose,
+                        'json': "{}"
                     }
                     );
                 console.log(this.name, this.purpose);
