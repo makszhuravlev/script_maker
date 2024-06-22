@@ -9,6 +9,8 @@ export default {
         methods: {
             showModal: function () {
                 this.$refs.modal.show = true
+                
+
             },
             showModalTwo: function () {
                 this.$refs.modalTwo.show = true
@@ -38,20 +40,20 @@ axios.get('http://88.84.211.248:5000/getall') .then(response => {
 const router = useRouter()
 const route = useRoute()
 const name = ref("Вася  Пупкин")
-    function getname(){
-     
-    }
-    function exit() {
-      router.push({ path: '/' })
+function getname(){
+  
+}
+function exit() {
+  router.push({ path: '/' })
 
-    }
-    function runScript(i) {
-      router.push({ path: '/editor/'+i })
-    }
-    function create(i) {
-      //router.push({ path: '/editor/1' })
-      this.$refs.modal.show = true
-    }
+}
+function runScript(i) {
+  router.push({ path: '/editor/'+i })
+}
+function create(i) {
+  //router.push({ path: '/editor/1' })
+  this.$refs.modal.show = true
+}
 
 </script>
 

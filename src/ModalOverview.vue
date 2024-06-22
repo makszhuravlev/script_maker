@@ -29,6 +29,7 @@
 </template>
  
 <script>
+    import axios from 'axios';
     export default {
         data(){
             return {
@@ -44,10 +45,18 @@
         },
         methods: {
             closeModal: function () {
+                axios.post("http://88.84.211.248:5000/create",
+                    {
+                        'json': "{}",
+                        'name':this.name,
+                        'purpose': this.purpose
+                    }
+                    );
                 console.log(this.name, this.purpose);
                 this.name = ''
                 this.purpose = ''
                 this.show = false
+                window.location.reload();
             }
         }
     }
