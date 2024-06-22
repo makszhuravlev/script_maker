@@ -29,12 +29,14 @@
 </template>
  
 <script>
+    import {useRouter,useRoute } from 'vue-router'
     import axios from 'axios';
     export default {
         data(){
             return {
                 name: '',
                 purpose: '',
+                id:0,
       }
         },
         name: "ModalWindow",
@@ -52,11 +54,16 @@
                         'json': "{}"
                     }
                     );
-                console.log(this.name, this.purpose);
-                this.name = ''
-                this.purpose = ''
+
                 this.show = false
-                window.location.reload();
+                axios.get('http://88.84.211.248:5000/getall') .then(response => { 
+                for (var key in response.data) {
+                    this.id = response.data[key].id
+                }
+                
+                router.push({ path: '/editor/'+this.id })
+                })
+                
             }
         }
     }

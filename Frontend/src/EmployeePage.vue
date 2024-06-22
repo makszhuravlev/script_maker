@@ -37,8 +37,7 @@ axios.get('http://88.84.211.248:5000/getall') .then(response => {
 const router = useRouter()
 const route = useRoute()
 const name = ref("Имя сотрудника")
-    function getname(){
-     
+    function getData(){
     }
     function exit() {
       router.push({ path: '/' })
@@ -59,7 +58,7 @@ const name = ref("Имя сотрудника")
       <modal-window ref="modal"></modal-window>
       <h1>{{ name }}</h1>
       <div class="button-container">
-        <button class="create-button" @click="showModal">Новый скрипт</button>
+        <button class="create-button" @click="showModal(), getData">Новый скрипт</button>
         
         <router-link > <button class="logout-button" @click="exit">Выход</button></router-link>
        
