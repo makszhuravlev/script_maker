@@ -61,7 +61,7 @@
                     this.id = response.data[key].id
                 }
                 
-                router.push({ path: '/editor/'+this.id })
+                this.$router.push(' editor/'+this.id )
                 })
                 
             }
