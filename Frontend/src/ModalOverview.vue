@@ -47,22 +47,30 @@
         },
         methods: {
             closeModal: function () {
-                axios.post("http://88.84.211.248:5000/create",
+                if(this.name && this.purpose){
+                    axios.post("http://88.84.211.248:5000/create",
                     {
                         'name':this.name,
                         'purpose': this.purpose,
                         'json': "{}"
                     }
                     );
+                   console.log(this.name + '-----------');
+                    this.show = false
 
-                this.show = false
-                axios.get('http://88.84.211.248:5000/getall') .then(response => { 
-                for (var key in response.data) {
-                    this.id = response.data[key].id
+                    axios.get('http://88.84.211.248:5000/getall') .then(response => { 
+                    for (var key in response.data) {
+                        this.id = response.data[key].id
+                    }
+                    this.$router.push('/editor/'+this.id )
+                })
+
+
+                }
+                else{
+                    this.show = false
                 }
                 
-                this.$router.push('/editor/'+this.id )
-                })
                 
             }
         }
