@@ -202,10 +202,6 @@
     margin-left: auto;
   }
   
-  .method-block {
-    background-color: #8473c1;
-    flex: 1 0 100%;
-    padding: 20px;
-  }
+
   </style>
   
