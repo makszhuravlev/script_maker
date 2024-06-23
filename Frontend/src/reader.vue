@@ -7,7 +7,7 @@
             <button v-for="(script, index) in scripts" :key="script" @click="setActiveScript(index)">{{ script.name }}</button>
           </div>
         </div>
-        <div class="content">
+        <div class="contentt">
           <div class="header">
             <h1>{{ activeScript.name }}</h1>
             <h1>Цель скрипта</h1>
@@ -136,7 +136,7 @@
     background-color: #199aec;
   }
   
-  .content {
+  .contentt {
     width: 80%;
     padding: 20px;
     display: flex;
