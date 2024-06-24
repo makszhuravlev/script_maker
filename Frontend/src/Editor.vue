@@ -33,11 +33,11 @@ const { onDragOver, onDrop, onDragLeave, isDragOver } = useDragAndDrop()
 
 const nodes = ref<Node>([])
 const edges = ref([])
+const ip = '88.84.211.248';
+const port = '5000';
 
-
-axios.get('http://88.84.211.248:5000/getall') .then(response => { 
+axios.get('http://' + ip + ':' + port + '/getall') .then(response => { 
  for (var key in response.data) {
-  //console.log(key, IdScript, response.data[key].id)
   if(response.data[key].id == IdScript){
   
     fromObject(JSON.parse(response.data[key].json))
@@ -67,7 +67,7 @@ function handleUpdate() {
 function onSave() {
   localStorage.setItem(flowKey, JSON.stringify(toObject()))
   console.log(JSON.stringify(toObject()))
-        axios.post("http://88.84.211.248:5000/update",
+        axios.post("http://" + ip + ':' + port + "/update",
           {
             'id': IdScript,
             'json': JSON.stringify(toObject())

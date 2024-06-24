@@ -43,8 +43,6 @@
     methods: {
       handleSubmit() {
         this.$router.push({ path: '/main' })
-        console.log('Username:', this.username);
-        console.log('Password:', this.password);
       },
     },
   };

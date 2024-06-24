@@ -21,21 +21,21 @@ export default {
 <script setup>
 import axios from 'axios';
 import { ref } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
+
 import {useRouter,useRoute } from 'vue-router'
 
-
+const ip = '88.84.211.248';
+const port = '5000';
 const data = ref([])
 
 
-axios.get('http://88.84.211.248:5000/getall') .then(response => { 
-  console.log(data.value)
+axios.get('http://' + ip + ':' + port + '/getall') .then(response => { 
+  console.log('http://' + ip + ':' + port + '/getall')
   data.value = response.data; 
   })
 
 
 const router = useRouter()
-const route = useRoute()
 const name = ref("Имя сотрудника")
     function getData(){
     }

@@ -5,25 +5,18 @@ import axios from 'axios';
 
 let id = 0
 const message = ref('')
-/**
- * @returns {string} - A unique id.
- */
+
+
 function getId() {
   return id++
 }
-
-/**
- * In a real world scenario you'd want to avoid creating refs in a global scope like this as they might not be cleaned up properly.
- * @type {{draggedType: Ref<string|null>, isDragOver: Ref<boolean>, isDragging: Ref<boolean>}}
- */
 const state = {
-  /**
-   * The type of the node being dragged.
-   */
   draggedType: ref(null),
   isDragOver: ref(false),
   isDragging: ref(false),
 }
+const ip = '88.84.211.248';
+const port = '5000';
 
 export default function useDragAndDrop() {
   const { draggedType, isDragOver, isDragging } = state
@@ -33,9 +26,8 @@ export default function useDragAndDrop() {
   const route = useRoute();
   const IdScript = route.params.id;
   console.log(IdScript)
-  axios.get('http://88.84.211.248:5000/getall') .then(response => { 
+  axios.get('http://' + ip + ':' + port + '/getall') .then(response => { 
     for (var key in response.data) {
-     //console.log(key, IdScript, response.data[key].id)
      if(response.data[key].id == IdScript){
       for (var item in JSON.parse(response.data[key].json).nodes)
        console.log(JSON.parse(response.data[key].json).nodes[item].id)
@@ -59,12 +51,6 @@ export default function useDragAndDrop() {
 
     document.addEventListener('drop', onDragEnd)
   }
-
-  /**
-   * Handles the drag over event.
-   *
-   * @param {DragEvent} event
-   */
   function onDragOver(event) {
     event.preventDefault()
 
@@ -88,10 +74,6 @@ export default function useDragAndDrop() {
     document.removeEventListener('drop', onDragEnd)
   }
 
-  /**
-   * Handles the drop event.
-   * @param {DragEvent} event
-   */
   function onDrop(event) {
     
     const position = screenToFlowCoordinate({
@@ -115,11 +97,6 @@ export default function useDragAndDrop() {
       position,
       data: { label:  message.value , description: "", dynamicFields: ""},
     }
-    /**
-     * Align node position after drop, so it's centered to the mouse
-     *
-     * We can hook into events even in a callback, and we can remove the event listener after it's been called.
-     */
     const { off } = onNodesInitialized(() => {
       updateNode(nodeId, (node) => ({
         position: { x: node.position.x - node.dimensions.width / 2, y: node.position.y - node.dimensions.height / 2 },

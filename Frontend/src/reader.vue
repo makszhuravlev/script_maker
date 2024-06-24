@@ -32,6 +32,9 @@
 import axios from 'axios';
 import {useRouter,useRoute } from 'vue-router'
 import { ref } from 'vue'
+const ip = '88.84.211.248';
+const port = '5000';
+
 export default {
   data() {
     return {
@@ -47,15 +50,13 @@ export default {
     };
   },
   created() {
-    axios.get('http://88.84.211.248:5000/getall') .then(response => { 
+    axios.get('http://' + ip + ':' + port + '/getall') .then(response => { 
       this.scripts = response.data
     })
     this.loadDialogData();
   },
   computed: {
     activeScript() {
-      
-      console.log(this.scripts)
       return this.scripts[this.activeScriptIndex];
     },
     clientOptions() {
@@ -79,7 +80,7 @@ export default {
       const route = useRoute();
       const IdScript = route.params.id;
       const data = ref([])
-      axios.get('http://88.84.211.248:5000/getall') .then(response => { 
+      axios.get('http://' + ip + ':' + port + '/getall') .then(response => { 
         for (var key in response.data) {
           if(response.data[key].id == IdScript){
             data.value = JSON.parse(response.data[key].json)
@@ -87,7 +88,6 @@ export default {
         }
 
 
-      // Инициализация узлов и рёбер
       this.nodes = data.value.nodes.reduce((acc, node) => {
         acc[node.id] = { ...node, edges: [] };
         return acc;
@@ -129,11 +129,6 @@ export default {
       } else {
         this.currentNode = null;
       }
-
-      // Отладочные сообщения
-      console.log("Selected Option:", option);
-      console.log("Next Manager Node:", nextManagerNode);
-      console.log("Current Node:", this.currentNode);
     },
   },
 };

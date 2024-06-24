@@ -29,8 +29,11 @@
 </template>
  
 <script>
+
     import {useRouter,useRoute } from 'vue-router'
     import axios from 'axios';
+    const ip = '88.84.211.248';
+    const port = '5000';
     export default {
         data(){
             return {
@@ -48,7 +51,7 @@
         methods: {
             closeModal: function () {
                 if(this.name && this.purpose){
-                    axios.post("http://88.84.211.248:5000/create",
+                    axios.post("http://" + ip + ':' + port + "/create",
                     {
                         'name':this.name,
                         'purpose': this.purpose,
@@ -59,7 +62,7 @@
                     this.purpose=''
                     this.show = false
 
-                    axios.get('http://88.84.211.248:5000/getall') .then(response => { 
+                    axios.get('http://' + ip + ':' + port + '/getall') .then(response => { 
                     for (var key in response.data) {
                         this.id = response.data[key].id + 1
                     }
