@@ -14,7 +14,7 @@ const router = createRouter({
         { path: '/editor/:id', component: Editor },
         { path: '/main', component: main},
         {path: '/', component: auth},
-        {path: '/reader', component: read}
+        {path: '/reader/:id', component: read}
     ]
 });
 

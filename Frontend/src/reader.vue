@@ -10,7 +10,7 @@
       <div class="contentt">
         <div class="header">
           <h1>{{ activeScript.name }}</h1>
-          <h1>Цель скрипта</h1>
+          <h1>{{ activeScript.purpose }}</h1>
         </div>
         <div class="main">
           <div class="manager-phrase">{{ currentNode ? currentNode.data.label : '' }}</div>
@@ -29,17 +29,13 @@
 </template>
 
 <script>
+import axios from 'axios';
+import {useRouter,useRoute } from 'vue-router'
+import { ref } from 'vue'
 export default {
   data() {
     return {
-      scripts: [
-        { 
-          name: "Скрипт 1",
-          managerPhrase: "Фраза менеджера 1",
-          clientResponses: ["Ответ клиента 1.1", "Ответ клиента 1.2", "Ответ клиента 1.3"]
-        },
-        // Add more scripts if needed
-      ],
+      scripts: [],
       activeScriptIndex: 0, 
       nodes: {},
       edges: [],
@@ -51,10 +47,15 @@ export default {
     };
   },
   created() {
+    axios.get('http://88.84.211.248:5000/getall') .then(response => { 
+      this.scripts = response.data
+    })
     this.loadDialogData();
   },
   computed: {
     activeScript() {
+      
+      console.log(this.scripts)
       return this.scripts[this.activeScriptIndex];
     },
     clientOptions() {
@@ -67,73 +68,55 @@ export default {
   },
   methods: {
     setActiveScript(index) {
+      const router = useRouter()
+      const route = useRoute()
+      router.push({ path: '/reader/'+this.scripts[index].id })
       this.activeScriptIndex = index;
-      this.loadDialogData();  // Reload dialog data when a new script is selected
+      this.loadDialogData()
     },
     
     loadDialogData() {
-      const data = {
-        "nodes": [
-          {"id":"2","type":"default","position":{"x":266.5,"y":143.8},"data":{"label":"Пошел в попу","description":""}},
-          {"id":"3","type":"default","position":{"x":645.5,"y":143.8},"data":{"label":"Здравствуйте","description":""}},
-          {"id":"4","type":"custom","position":{"x":397.5,"y":263.8},"data":{"label":"Ну ты и лох","description":""}},
-          {"id":"5","type":"default","position":{"x":225.5,"y":365.8},"data":{"label":"Ланта лучший сервис","description":""}},
-          {"id":"6","type":"default","position":{"x":656.5,"y":369.8},"data":{"label":"Ланта самый лучший сервис","description":""}},
-          {"id":"7","type":"custom","position":{"x":530.5,"y":451.8},"data":{"label":"До свидания","description":""}},
-          {"id":"8","type":"custom","position":{"x":449.203125,"y":23.799999999999997},"data":{"label":"Фраза менеджера","description":"","dynamicFields":""}}
-        ],
-        "edges": [
-          {"id":"vueflow__edge-3-4a","type":"default","source":"3","target":"4","sourceHandle":null,"targetHandle":"a","data":{},"label":"","sourceX":770.5,"sourceY":182.8,"targetX":533.5,"targetY":259.8},
-          {"id":"vueflow__edge-2-4a","type":"default","source":"2","target":"4","sourceHandle":null,"targetHandle":"a","data":{},"label":"","sourceX":391.5,"sourceY":182.8,"targetX":533.5,"targetY":259.8},
-          {"id":"vueflow__edge-4b-5","type":"default","source":"4","target":"5","sourceHandle":"b","targetHandle":null,"data":{},"label":"","sourceX":533.5,"sourceY":303.8,"targetX":350.5,"targetY":362.8},
-          {"id":"vueflow__edge-4b-6","type":"default","source":"4","target":"6","sourceHandle":"b","targetHandle":null,"data":{},"label":"","sourceX":533.5,"sourceY":303.8,"targetX":781.5,"targetY":366.8},
-          {"id":"vueflow__edge-5-7a","type":"default","source":"5","target":"7","sourceHandle":null,"targetHandle":"a","data":{},"label":"","sourceX":350.5,"sourceY":404.8,"targetX":666.5,"targetY":447.8},
-          {"id":"vueflow__edge-6-7a","type":"default","source":"6","target":"7","sourceHandle":null,"targetHandle":"a","data":{},"label":"","sourceX":781.5,"sourceY":408.8,"targetX":666.5,"targetY":447.8},
-          {"id":"vueflow__edge-8b-2","type":"default","source":"8","target":"2","sourceHandle":"b","targetHandle":null,"data":{},"label":"","sourceX":585.203125,"sourceY":63.8,"targetX":391.5,"targetY":140.8},
-          {"id":"vueflow__edge-8b-3","type":"default","source":"8","target":"3","sourceHandle":"b","targetHandle":null,"data":{},"label":"","sourceX":585.203125,"sourceY":63.8,"targetX":770.5,"targetY":140.8}
-        ],
-        "position":[0,11.200000000000001],
-        "zoom":1,
-        "viewport":{"x":0,"y":11.200000000000001,"zoom":1}
-      };
+      const route = useRoute();
+      const IdScript = route.params.id;
+      const data = ref([])
+      axios.get('http://88.84.211.248:5000/getall') .then(response => { 
+        for (var key in response.data) {
+          if(response.data[key].id == IdScript){
+            data.value = JSON.parse(response.data[key].json)
+          }
+        }
+
 
       // Инициализация узлов и рёбер
-      this.nodes = data.nodes.reduce((acc, node) => {
+      this.nodes = data.value.nodes.reduce((acc, node) => {
         acc[node.id] = { ...node, edges: [] };
         return acc;
       }, {});
 
-      this.edges = data.edges;
+      this.edges = data.value.edges;
 
-      data.edges.forEach(edge => {
+      data.value.edges.forEach(edge => {
         if (this.nodes[edge.source]) {
           this.nodes[edge.source].edges.push(edge);
         }
       });
 
-      this.graphData.nodes = data.nodes.map(node => ({
+      this.graphData.nodes = data.value.nodes.map(node => ({
         id: node.id,
         data: node.data,
         type: node.type,
       }));
 
-      this.graphData.links = data.edges.map(edge => ({
+      this.graphData.links = data.value.edges.map(edge => ({
         source: edge.source,
         target: edge.target,
         label: edge.label,
       }));
-
-      // Определение начального узла (узел без входящих рёбер)
       const nodesWithIncomingEdges = new Set(this.edges.map(edge => edge.target));
       const initialNode = this.graphData.nodes.find(node => !nodesWithIncomingEdges.has(node.id));
 
       this.currentNode = initialNode ? this.nodes[initialNode.id] : null;
-
-      // Отладочные сообщения
-      console.log("Nodes:", this.nodes);
-      console.log("Edges:", this.edges);
-      console.log("Graph Data:", this.graphData);
-      console.log("Current Node:", this.currentNode);
+        })
     },
     selectOption(option) {
       const nextManagerNode = this.edges
