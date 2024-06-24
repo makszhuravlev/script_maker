@@ -55,12 +55,13 @@
                         'json': "{}"
                     }
                     );
-                   console.log(this.name + '-----------');
+                    this.name=''
+                    this.purpose=''
                     this.show = false
 
                     axios.get('http://88.84.211.248:5000/getall') .then(response => { 
                     for (var key in response.data) {
-                        this.id = response.data[key].id
+                        this.id = response.data[key].id + 1
                     }
                     this.$router.push('/editor/'+this.id )
                 })

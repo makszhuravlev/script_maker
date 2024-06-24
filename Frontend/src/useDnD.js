@@ -39,7 +39,7 @@ export default function useDragAndDrop() {
      if(response.data[key].id == IdScript){
       for (var item in JSON.parse(response.data[key].json).nodes)
        console.log(JSON.parse(response.data[key].json).nodes[item].id)
-       id = JSON.parse(response.data[key].json).nodes[item].id + 1
+       id = JSON.parse(response.data[key].json).nodes[item].id 
      }
     }
    })

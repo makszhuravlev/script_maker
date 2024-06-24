@@ -14,6 +14,7 @@
     "express": "^4.19.2",
     "request": "^2.88.2",
     "vue": "^3.3.8",
+    "vue-d3-network": "^0.1.28",
     "vue-router": "^4.3.3"
   },
   "devDependencies": {
